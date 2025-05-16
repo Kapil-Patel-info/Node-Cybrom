@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Us</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    
+
+    <div class="nav">
+        <a href="/students/home">Home</a> 
+        <a href="/students/about">about</a>
+        <a href="/students/services">services</a>
+        <a href="/students/gallery">gallery</a>
+        <a href="/students/placement">placement</a>
+        <a href="/students/join">join</a>
+       <a href="/students/contact">contact</a>
+    </div>
+
+    <h1>Join Our Institute</h1>
+
+    <p style="margin: 20px; font-size: 18px;">
+        Ready to take the next step in your academic journey? Fill out the form below to express your interest in joining our institute. Our admissions team will get in touch with you shortly.
+    </p>
+
+    <div style="margin: 20px;">
+        <form action="/students/register" method="POST" style="font-size: 16px;">
+            <label for="name">Full Name:</label><br>
+            <input type="text" id="name" name="name" required style="margin-bottom: 10px; width: 300px;"><br>
+
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" name="email" required style="margin-bottom: 10px; width: 300px;"><br>
+
+            <label for="course">Preferred Course:</label><br>
+            <input type="text" id="course" name="course" required style="margin-bottom: 10px; width: 300px;"><br>
+
+            <label for="message">Additional Message:</label><br>
+            <textarea id="message" name="message" rows="4" style="margin-bottom: 10px; width: 300px;"></textarea><br>
+
+            <button type="submit" style="padding: 5px 15px; font-size: 16px; background-color: navy; color: white; border: none;">Submit</button>
+        </form>
+    </div>
+
+</body>
+</html>
