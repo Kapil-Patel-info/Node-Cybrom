@@ -1,0 +1,37 @@
+body{
+    margin: 0;
+    padding: 0;
+
+}
+
+.nav{
+    background-color: rgb(154, 77, 11);
+    height: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    
+}
+
+.nav a{
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 30px;
+    margin-left: 10px;
+}
+
+.content{
+    padding: 20px;
+    /* background-color: black;
+    color: white; */
+    height: 100vh;
+
+}
+
+#delete{
+    text-decoration: none;
+    color: black;
+
+}
