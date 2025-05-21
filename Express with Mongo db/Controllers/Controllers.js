@@ -14,6 +14,7 @@ const insertStudent = (req, res) => {
   let { name, age, rollno, subject, fees } = req.body;
   let newStudent = new Student({ name, age, rollno, subject, fees });
   newStudent.save();
+
   res.redirect("/display");
 };
 
@@ -32,23 +33,40 @@ const contactPage = (req, res) => {
 
 const updatePage = async (req, res) => {
   const students = await Student.find();
-  
-  res.render("update", { students });
 
+  res.render("update", { students });
 };
+
+const editPage = async (req, res) => {
+  const { id } = req.query;
+
+  const data = await Student.findById(id);
+  console.log(data);
+  
+  res.render("edit",{data});
+};
+
+
+const editSave = async(req,res)=>{
+
+   let { id, name, age, rollno, subject, fees } = req.body;
+  
+await Student.findByIdAndUpdate(id,{
+  name, age, rollno, subject, fees 
+});
+
+  res.redirect("/display");
+}
 
 const deleteData = async (req, res) => {
-   
-const {id} = req.query;
+  const { id } = req.query;
 
-await Student.findByIdAndDelete(id);
-res.redirect("/update");
-
+  await Student.findByIdAndDelete(id);
+  res.redirect("/update");
 };
 
-
 const searchPage = (req, res) => {
-res.render("search");
+  res.render("search");
 };
 
 module.exports = {
@@ -60,5 +78,7 @@ module.exports = {
   contactPage,
   updatePage,
   searchPage,
-  deleteData
+  deleteData,
+  editPage,
+  editSave
 };

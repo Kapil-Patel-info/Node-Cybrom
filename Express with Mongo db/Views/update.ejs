@@ -44,10 +44,11 @@
             <td><%= student.subject %></td>
             <td><%= student.fees %></td>
             <td>
-              <a id="delete" href="/update?id=<%= student._id %>">Update</a> 
-              
+              <a id="delete" href="/editData?id=<%= student._id %>">edit</a>
             </td>
-            <td><a id="delete" href="/delete?id=<%= student._id %>">Delete</a></td>
+            <td>
+              <a id="delete" href="/delete?id=<%= student._id %>">Delete</a>
+            </td>
           </tr>
           <% }) %>
         </tbody>

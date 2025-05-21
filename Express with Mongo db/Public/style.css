@@ -24,14 +24,14 @@ body{
 
 .content{
     padding: 20px;
-    /* background-color: black;
-    color: white; */
+    background-color: #282828;
+    color: white;
     height: 100vh;
 
 }
 
 #delete{
     text-decoration: none;
-    color: black;
+    color: rgb(246, 243, 243);
 
 }

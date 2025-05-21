@@ -17,5 +17,7 @@ Routes.get("/update", controllers.updatePage);
 
 Routes.get("/delete", controllers.deleteData);
 
+Routes.get("/editData",controllers.editPage);
+Routes.post("/editSave",controllers.editSave);
 
 module.exports = Routes;
