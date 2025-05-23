@@ -1,6 +1,7 @@
 const express = require("express");
 const Routes = express.Router();
 const controllers = require("../Controllers/Controllers");
+const { collection } = require("../Models/Model");
 
 
 Routes.get("/", controllers.homePage);
@@ -19,5 +20,7 @@ Routes.get("/delete", controllers.deleteData);
 
 Routes.get("/editData",controllers.editPage);
 Routes.post("/editSave",controllers.editSave);
+
+Routes.post("/searchData",controllers.searchData);
 
 module.exports = Routes;

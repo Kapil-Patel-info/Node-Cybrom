@@ -5,7 +5,7 @@ body{
 }
 
 .nav{
-    background-color: rgb(154, 77, 11);
+    background-color: rgb(212, 5, 5);
     height: 50px;
     width: 100%;
     display: flex;
@@ -24,14 +24,18 @@ body{
 
 .content{
     padding: 20px;
-    background-color: #282828;
-    color: white;
+    /* background-color: #282828;
+    color: white; */
     height: 100vh;
 
 }
 
 #delete{
     text-decoration: none;
-    color: rgb(246, 243, 243);
+    border: 4px solid black;
+    border-radius: 5px;
+    color: black;
+    padding: 3px;
+
 
 }

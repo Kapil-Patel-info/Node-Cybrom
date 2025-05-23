@@ -1,23 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search Student</title>
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-    
-  <div class="nav">
-      <a href="/">Home</a>
-      <a href="/insert">Insert</a>
-      <a href="/display">Display</a>
-      <a href="/update">Update</a>
-      <a href="/search">Search</a>
-      <a href="/about">About Us</a>
-      <a href="/contact">Contact Us</a>
-    </div>
 
-<h1>search page </h1>
-    
+  <div class="nav">
+    <a href="/">Home</a>
+    <a href="/insert">Insert</a>
+    <a href="/display">Display</a>
+    <a href="/update">Update</a>
+    <a href="/search">Search</a>
+    <a href="/about">About Us</a>
+    <a href="/contact">Contact Us</a>
+  </div>
+
+  <br><hr>
+
+  <form action="/searchData" method="post">
+  <input type="text" placeholder="enter rollno" name="rollno" required>
+  <button type="submit">Search</button>
+</form>
+
+<% if (student && student.length > 0) { %>
+  <h2>Search Result:</h2>
+  <% student.forEach(std => { %>
+    <div class="student-card">
+      <p><strong>Roll No:</strong> <%= std.rollno %></p>
+      <p><strong>Name:</strong> <%= std.name %></p>
+      <p><strong>age:</strong> <%= std.age %></p>
+        <p><strong>sub:</strong> <%= std.subject %></p>
+          <p><strong>fees:</strong> <%= std.fees %></p>
+            
+
+    </div>
+    <hr>
+  <% }) %>
+<% } else if (student) { %>
+  <p>No student found with that roll number.</p>
+<% } %>
 </body>
 </html>

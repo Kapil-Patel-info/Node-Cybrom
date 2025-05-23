@@ -3,7 +3,7 @@ const app = express();
 const path = require("path");
 const Routes = require("./Routes/Routes");
 const mongoose = require('mongoose');
-const { log } = require("console");
+
 
 main().then(()=>console.log("mongo db Connected...")).catch(err => console.log(err));
 

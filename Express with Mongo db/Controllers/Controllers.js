@@ -65,9 +65,22 @@ const deleteData = async (req, res) => {
   res.redirect("/update");
 };
 
+
+
 const searchPage = (req, res) => {
-  res.render("search");
+
+  res.render("search", { student: null }); 
 };
+
+
+const searchData = async (req, res) => {
+
+    const { rollno } = req.body;
+    const SData = await Student.find({ rollno: rollno });
+    res.render("search", { student: SData }); 
+  
+};
+
 
 module.exports = {
   homePage,
@@ -80,5 +93,6 @@ module.exports = {
   searchPage,
   deleteData,
   editPage,
-  editSave
+  editSave,
+  searchData
 };
