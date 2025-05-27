@@ -13,6 +13,7 @@ export default function Header(){
 <Link to="/update">Update</Link> 
 <Link to="/search">Search</Link> 
 <Link to="/contact">Contact</Link> 
+{/* <Link to="/EditPage">EditPage</Link> */}
 
 </nav>
     
