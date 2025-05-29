@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const stuControllers = require("../controllers/stuControllers");
 
-// Routes
+
 router.post("/add-student", stuControllers.addStudent);
 router.get("/display", stuControllers.DisplayPage);
 router.delete("/delete/:id", stuControllers.deleteData); 

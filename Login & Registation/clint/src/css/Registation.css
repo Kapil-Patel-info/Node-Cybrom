@@ -1,0 +1,72 @@
+.premium-registration {
+  background-color: #f8f9fa;
+  min-height: 100vh;
+
+}
+
+.premium-card {
+  width: 100%;
+  max-width: 580px;
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  padding: 40px;
+}
+
+.card-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.card-header h2 {
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 8px;
+  font-size: 28px;
+}
+
+.premium-input {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 14px 16px;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  background-color: #fff;
+}
+
+.premium-input:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+.premium-button {
+  width: 100%;
+  padding: 14px;
+  font-weight: 500;
+  background-color: #2c3e50;
+  border: none;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+  color: white;
+}
+
+.premium-button:hover {
+  background-color: #1a252f;
+  transform: translateY(-1px);
+}
+
+.form-label {
+  font-weight: 500;
+  color: #34495e;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+@media (max-width: 576px) {
+  .premium-card {
+    padding: 30px 20px;
+    margin: 20px;
+  }
+}

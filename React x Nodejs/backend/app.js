@@ -1,14 +1,14 @@
 
-const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
+const express = require("express");          
+const mongoose = require("mongoose");    
+const cors = require("cors");         
 const stuRoutes = require("./routes/stuRoutes");
 
 const app = express();
 const port = 8080;
 
 
-app.use(cors({ origin: "http://localhost:5173" }));
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
