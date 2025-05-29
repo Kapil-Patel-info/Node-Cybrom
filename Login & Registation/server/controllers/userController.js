@@ -20,12 +20,15 @@ const loginPage = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const user = await userModel.findOne({ email, password });
+    const user = await userModel.findOne({ email });
 
-    if (user) {
-      res.status(200).json({ message: "Login successful" });
+    if (!user) {
+      res.status(401).json({ message: "Invalid Email" });
+    }
+    if (user.password !== password) {
+      res.status(401).json({ message: "Invalid password" });
     } else {
-      res.status(401).json({ message: "Invalid email or password" });
+      res.status(200).json({ message: "User Login Sucessfully" });
     }
   } catch (err) {
     console.log("Backend Error = ", err);
@@ -35,5 +38,5 @@ const loginPage = async (req, res) => {
 
 module.exports = {
   registrationPage,
-  loginPage
+  loginPage,
 };

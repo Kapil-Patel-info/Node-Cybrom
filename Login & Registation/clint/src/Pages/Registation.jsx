@@ -4,6 +4,7 @@ import Form from "react-bootstrap/Form";
 import backendUrl from "../BackendUrl";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
 
 function Registation() {
   const navigate = useNavigate();
@@ -27,8 +28,11 @@ function Registation() {
     try {
       const response = await axios.post(`${backendUrl}/registration`, formData);
       console.log("Frontend: ", response.data);
-      alert("User registration done successfully.");
-      navigate("/home");
+       toast.success("User registration done successfully.");
+        const timeoutId = setTimeout(() => {
+        navigate("/dashboard");
+      }, 2000);
+     
     } catch (error) {
       console.error("ERROR =", error);
     }
@@ -101,7 +105,7 @@ function Registation() {
         LogIn
       </span> now </p>  
      
-      
+       <ToastContainer />
     </>
   );
 }

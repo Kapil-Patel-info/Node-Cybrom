@@ -16,10 +16,13 @@ const Header = () => {
             <Nav.Link style={{color:"white"}} as={Link} to="/home">
               User-Login
             </Nav.Link>
-            <Nav.Link style={{color:"white"}} as={Link} to="/dashboard">
-              Dashboard
-            </Nav.Link>
+          
+            
+
           </Nav>
+
+            
+
         </Navbar.Collapse>
       </Container>
     </Navbar>

@@ -13,10 +13,18 @@ function App() {
           <Route index element={<Home />} />
           <Route path="/home" element={<Home />} />
           <Route path="/registration" element={<Registation />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+           <Route path="/dashboard" element={<Dashboard />} />
         </Route>
       </Routes>
+
+
     </BrowserRouter>
+
+
+     
+
+
+
   );
 }
 
