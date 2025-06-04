@@ -3,6 +3,7 @@ import axios from "axios";
 import "../css/Insert.css";
 
 export default function Insert() {
+  const [uploadImage,setUploadImage]=useState("");
   const [input, setInput] = useState({
     rollno: "",
     name: "",
@@ -20,27 +21,35 @@ export default function Insert() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.post("http://localhost:8080/add-student", input);
-      console.log("Response from server:", response.data);
+     
 
-      alert("Student data added successfully!");
-      setInput({ rollno: "", name: "", subject: "", fees: "" });
-    } catch (err) {
-      console.error("Error submitting form:", err);
-      if (err.response) {
-        alert("Failed to add student: " + err.response.data.error);
-      } else {
-        alert("Server error");
-      }
-    }
+   const formData = new FormData();
+    formData.append('file',uploadImage);
+    formData.append('upload_preset','kapilPhootes');
+    formData.append('cloud_name','dn9v7oysy');
+    
+
+    const response = await axios.post('https://api.cloudinary.com/v1_1/dn9v7oysy/image/upload',formData);
+
+
+
+
+console.log(response);
+alert("sucess");
+
   };
+
+  const handleImg=(e)=>{
+
+setUploadImage(e.target.files[0]);
+console.log(uploadImage);
+  }
 
   return (
     <>
       <h1 className="h1">Insert Students Data</h1>
       <div className="formset d-flex justify-content-center">
-        <form className="form-group w-50" onSubmit={handleSubmit}>
+        <form className="form-group w-50" >
           <div>
             Rollno:
             <input
@@ -81,8 +90,20 @@ export default function Insert() {
               onChange={handleChange}
             />
           </div>
+
+          <div>
+            image:
+            <input
+              className="form-control"
+              type="file"
+              name="image"
+              value={input.image}
+                onChange={handleImg}
+            />
+          </div>
+
           <br />
-          <button className="btn btn-primary" type="submit">
+          <button className="btn btn-primary" type="submit" onClick={handleSubmit}>
             Submit
           </button>
         </form>

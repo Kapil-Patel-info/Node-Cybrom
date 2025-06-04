@@ -1,14 +1,21 @@
 
 
+const Dashboard = () => {
+  const email = localStorage.getItem("email");
+  const username = localStorage.getItem("username");
 
-const dashboard=()=>{
+  return (
+    <>
+      <h1>Welcome to Dashboard</h1>
 
-    return(<>
+      <p><strong>Name:</strong> {username ? username : "N/A"}</p>
+      <p><strong>Email:</strong> {email ? email : "N/A"}</p>
+
+
     
-    <h1>welcome to dashboard</h1>
-    
-    </>);
-}
 
+    </>
+  );
+};
 
-export default dashboard;
+export default Dashboard;

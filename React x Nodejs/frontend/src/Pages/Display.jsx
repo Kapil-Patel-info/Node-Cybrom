@@ -29,6 +29,7 @@ const Display = () => {
             <th>Name</th>
             <th>Subject</th>
             <th>Fees</th>
+           
           </tr>
         </thead>
         <tbody>
@@ -39,6 +40,7 @@ const Display = () => {
               <td>{student.name}</td>
               <td>{student.subject}</td>
               <td>₹{student.fees}</td>
+
             </tr>
           ))}
         </tbody>

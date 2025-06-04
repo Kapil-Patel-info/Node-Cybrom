@@ -29,9 +29,13 @@ const Home = () => {
   try {
     const response = await axios.post(`${backendUrl}/login`, formData);
     toast.success(response.data.message);
+     localStorage.setItem("email", formData.email);
+    if (response.data.username) {
+      localStorage.setItem("username", response.data.username);
+    }
     const timeoutId = setTimeout(() => {
         navigate("/dashboard");
-      }, 2000);
+      }, 1000);
   } catch (error) {
     console.log("Error frontend = ", error);
     toast.error(error.response.data.message); 

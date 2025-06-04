@@ -3,9 +3,10 @@ const express = require("express");
 const mongoose = require("mongoose");    
 const cors = require("cors");         
 const stuRoutes = require("./routes/stuRoutes");
+require("dotenv").config();
 
 const app = express();
-const port = 8080;
+const port = process.env.PORT;
 
 
 app.use(cors());
@@ -13,7 +14,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 
-mongoose.connect("mongodb://localhost:27017/stuDB")
+mongoose.connect(process.env.DBCON)
   .then(() => console.log("MongoDB connected successfully"))
   .catch(err => console.log("MongoDB connection error:", err));
 
