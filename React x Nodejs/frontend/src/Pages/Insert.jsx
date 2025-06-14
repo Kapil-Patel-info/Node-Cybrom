@@ -3,7 +3,7 @@ import axios from "axios";
 import "../css/Insert.css";
 
 export default function Insert() {
-  const [uploadImage,setUploadImage]=useState("");
+  const [uploadImage, setUploadImage] = useState(null);
   const [input, setInput] = useState({
     rollno: "",
     name: "",
@@ -19,93 +19,59 @@ export default function Insert() {
     }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-     
-
-   const formData = new FormData();
-    formData.append('file',uploadImage);
-    formData.append('upload_preset','kapilPhootes');
-    formData.append('cloud_name','dn9v7oysy');
-    
-
-    const response = await axios.post('https://api.cloudinary.com/v1_1/dn9v7oysy/image/upload',formData);
-
-
-
-
-console.log(response);
-alert("sucess");
-
+  const handleImg = (e) => {
+    setUploadImage(e.target.files[0]);
   };
 
-  const handleImg=(e)=>{
+  const handleSubmit = async (e) => {
+  e.preventDefault();
 
-setUploadImage(e.target.files[0]);
-console.log(uploadImage);
-  }
+  const formData = new FormData();
+  formData.append("rollno", input.rollno);
+  formData.append("name", input.name);
+  formData.append("subject", input.subject);
+  formData.append("fees", input.fees);
+  formData.append("image", uploadImage); 
+
+  try {
+    const response = await axios.post("http://localhost:8080/add-student", formData);
+
+    console.log("Upload success:", response.data);
+    alert("Student added successfully!");
+  } catch (error) {
+    console.error("Submission error:", error);
+    alert("Failed to submit form.");
+ }
+};
+
 
   return (
     <>
       <h1 className="h1">Insert Students Data</h1>
       <div className="formset d-flex justify-content-center">
-        <form className="form-group w-50" >
+        <form className="form-group w-50" onSubmit={handleSubmit} encType="multipart/form-data">
           <div>
             Rollno:
-            <input
-              className="form-control"
-              type="text"
-              name="rollno"
-              value={input.rollno}
-              onChange={handleChange}
-            />
+            <input className="form-control" type="text" name="rollno" value={input.rollno} onChange={handleChange} required />
           </div>
           <div>
             Name:
-            <input
-              className="form-control"
-              type="text"
-              name="name"
-              value={input.name}
-              onChange={handleChange}
-            />
+            <input className="form-control" type="text" name="name" value={input.name} onChange={handleChange} required />
           </div>
           <div>
             Subject:
-            <input
-              className="form-control"
-              type="text"
-              name="subject"
-              value={input.subject}
-              onChange={handleChange}
-            />
+            <input className="form-control" type="text" name="subject" value={input.subject} onChange={handleChange} required />
           </div>
           <div>
             Fees:
-            <input
-              className="form-control"
-              type="text"
-              name="fees"
-              value={input.fees}
-              onChange={handleChange}
-            />
+            <input className="form-control" type="number" name="fees" value={input.fees} onChange={handleChange} required />
           </div>
-
           <div>
-            image:
-            <input
-              className="form-control"
-              type="file"
-              name="image"
-              value={input.image}
-                onChange={handleImg}
-            />
+            Image:
+            <input className="form-control" type="file" name="image" onChange={handleImg} accept="image/*" required />
           </div>
-
           <br />
-          <button className="btn btn-primary" type="submit" onClick={handleSubmit}>
-            Submit
-          </button>
+          <button className="btn btn-primary" type="submit">Submit</button>
         </form>
       </div>
     </>

@@ -18,8 +18,17 @@ const studentSchema = new mongoose.Schema({
   fees: {
     type: Number,
     required: true
-  }
+  },
+  image: { type: String }
+
 });
 
 const Student = mongoose.model("Student", studentSchema);
 module.exports = Student;
+
+
+// ,
+//   imageUrl:{
+//     type:String
+//   }
+

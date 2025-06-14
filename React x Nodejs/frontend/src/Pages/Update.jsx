@@ -4,8 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 const Update = () => {
   const [data, setData] = useState([]);
-
-const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const loadData = async () => {
     try {
@@ -16,18 +15,17 @@ const navigate = useNavigate();
     }
   };
 
-    const recEdit=async(id)=>{
-
-console.log(id);
-  navigate(`/EditPage/${id}`);
-
-  }
-
-
   const deleteData = async (id) => {
+    try {
+      await axios.delete(`http://localhost:8080/delete/${id}`);
+      loadData(); 
+    } catch (error) {
+      console.error("Failed to delete student", error);
+    }
+  };
 
-      await axios.delete(`http://localhost:8080/delete${id}`);
-      loadData();
+  const recEdit = (id) => {
+    navigate(`/EditPage/${id}`);
   };
 
   useEffect(() => {
@@ -47,6 +45,7 @@ console.log(id);
             <th>Fees</th>
             <th>Delete</th>
             <th>Edit</th>
+            <th>Image</th>
           </tr>
         </thead>
         <tbody>
@@ -57,15 +56,19 @@ console.log(id);
               <td>{student.name}</td>
               <td>{student.subject}</td>
               <td>₹{student.fees}</td>
+              
               <td>
                 <button
                   className="btn btn-danger btn-sm"
-                  onClick={() => deleteData(student._id)}
+                  onClick={() => {
+                    
+                      deleteData(student._id);
+                    
+                  }}
                 >
                   Delete
                 </button>
               </td>
-
               <td>
                 <button
                   className="btn btn-primary btn-sm"
@@ -73,6 +76,18 @@ console.log(id);
                 >
                   Edit
                 </button>
+              </td>
+
+<td>
+                {student.image && (
+                  <img
+                    src={student.image}
+                    alt={student.name}
+                    width="80"
+                    height="80"
+                    style={{ objectFit: "cover", borderRadius: "5px" }}
+                  />
+                )}
               </td>
 
             </tr>
