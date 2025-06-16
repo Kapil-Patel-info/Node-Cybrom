@@ -48,13 +48,13 @@ const createUser = async (req, res) => {
       host: 'smtp.ethereal.email',
       port: 587,
       auth: {
-        user: "pablo.considine96@ethereal.email",
-        pass: "cjXbTW5D6XzTGQcxqZ"
+        user: "josue22@ethereal.email",
+        pass: "JVkYechv9qv3KcTPYq"
       }
     });
 
     let mailOptions = {
-      from: `"Admin" <${ "pablo.considine96@ethereal.email"}>`,
+      from: `"Admin" <${ "josue22@ethereal.email"}>`,
       to: email,
       subject: 'Sending Email by Admin',
       text: `Welcome: ${name}!\nYour Password: ${UserPass}\nYou can login with this password.`

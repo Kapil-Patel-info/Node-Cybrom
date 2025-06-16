@@ -3,5 +3,6 @@ const route = express.Router();
 const UserController= require("../controllers/UserController");
 
 route.post("/userlogin", UserController.loginCheck);
+route.get("/mytask", UserController.myTaskList);
 
 module.exports=route;
