@@ -1,6 +1,7 @@
 const UserModel= require("../models/userModel");
 const TaskModel = require("../models/taskModel");
 
+
 const loginCheck=async(req, res)=>{
     const { email, password}=req.body;
     
@@ -23,12 +24,8 @@ const loginCheck=async(req, res)=>{
 
 
 const myTaskList=async(req, res)=>{
-  console.log("read");
+
   const { id } = req.query;
-  
-  console.log("form backend =>",id);
-
-
    try {
         const Task= await TaskModel.find({userid:id});
         console.log(Task);
@@ -40,8 +37,17 @@ const myTaskList=async(req, res)=>{
 }
 
 
+const taskComplete = async(req,res)=>{
+  const {id} = req.query;
+
+  const response = await  TaskModel.findByIdAndUpdate(id,{taskstatus:true});
+  res.status(201).send({response,msg:"task sumbit Successfully"});
+
+};
+
 
 module.exports={
     loginCheck,
-    myTaskList
+    myTaskList,
+    taskComplete
 }

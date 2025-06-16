@@ -26,7 +26,7 @@ const UserDashBoard = () => {
 
       <Navbar bg="dark" variant="dark" expand="lg" className="shadow-sm">
         <Container>
-          <Navbar.Brand>User Area</Navbar.Brand>
+          <Navbar.Brand>User</Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link as={Link} to="">Home</Nav.Link>
             <Nav.Link as={Link} to="mytask">My Task</Nav.Link>

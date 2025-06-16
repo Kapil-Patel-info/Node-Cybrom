@@ -102,9 +102,36 @@ const assignTask=async(req, res)=>{
 
 
 
+
+const taskDetail=async(req, res)=>{
+  try {
+     const Task= await TaskModel.find().populate("userid");
+     res.status(200).send(Task);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+
+const changeTaskStatus=async(req, res)=>{
+    const {id} = req.query;
+    console.log(req.query);
+    try {
+         const Task = await TaskModel.findByIdAndUpdate(id, {
+          taskstatus:false
+         })
+         res.status(201).send("Succesfully updated!!!");
+    } catch (error) {
+       console.log(error);
+    }
+}
+
+
 module.exports={
     adminLogin,
     createUser,
     showUserData,
-    assignTask
+    assignTask,
+     taskDetail,
+    changeTaskStatus
 }

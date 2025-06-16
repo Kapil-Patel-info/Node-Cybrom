@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import BackEndUrl from "../config/BackendUrl";
-import Table from 'react-bootstrap/Table';
+import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 
 const MyTask = () => {
@@ -9,12 +9,12 @@ const MyTask = () => {
 
   const loadData = async () => {
     const userId = localStorage.getItem("userid");
-    console.log(userId);
-     const api = `${BackEndUrl}/user/mytask/?id=${userId}`;
+
+    const api = `${BackEndUrl}/user/mytask/?id=${userId}`;
 
     try {
       const response = await axios.get(api);
-      console.log(response.data);
+
       setMydata(response.data);
     } catch (error) {
       console.error("Error fetching tasks:", error);
@@ -23,18 +23,25 @@ const MyTask = () => {
 
   useEffect(() => {
     loadData();
-    
   }, []);
 
-  const submitTask = (id) => {
-    alert(`Submit  Task ID: ${id}`);
-    
+  const submitTask = async (id) => {
+    const api = `${BackEndUrl}/user/completetask/?id=${id}`;
+
+    try {
+      const response = await axios.get(api);
+      console.log("form sumbit btn => ", response);
+      loadData();
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
     <div className="p-3">
-
-      <h3 className="text-center text-primary mb-4">📋 Task List Given By Admin</h3>
+      <h3 className="text-center text-primary mb-4">
+        📋 Task List Given By Admin
+      </h3>
 
       {mydata.length > 0 ? (
         <Table striped bordered hover responsive className="shadow-sm">
@@ -53,9 +60,13 @@ const MyTask = () => {
                 <td>{task.description}</td>
                 <td>{task.compday}</td>
                 <td>
-                  <Button variant="success" size="sm" onClick={() => submitTask(task._id)}>
-                    Submit Task
-                  </Button>
+                 
+                {task.taskstatus ? (<>
+                  <Button style={{backgroundColor:"green"}} disabled>Task Submited</Button>
+                </>) :(<>
+                       <Button onClick={()=>{submitTask(task._id)}}>Submit Task</Button>
+                </>)}
+                 
                 </td>
               </tr>
             ))}

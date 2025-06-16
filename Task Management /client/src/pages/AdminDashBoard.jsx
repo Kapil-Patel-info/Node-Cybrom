@@ -80,6 +80,23 @@ const AdminDashboard = () => {
                     <FaTasks className="me-2" />
                     Assign Task
                   </Nav.Link>
+
+
+
+                    <Nav.Link 
+                    as={Link} 
+                    to="taskdetail" 
+                    className="admin-menu-item"
+                  >
+                    <FaTasks className="me-2" />
+                    TaskDetail
+                  </Nav.Link>
+
+
+                  
+
+
+
                 </Nav>
               </Card.Body>
             </Card>
