@@ -1,0 +1,76 @@
+/* TaskDetail.css */
+
+.task-detail-container {
+  background-color: #f2f3f5;
+  min-height: 100vh;
+}
+
+.task-card {
+  border: none;
+  border-radius: 10px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  overflow: hidden;
+}
+
+.task-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.task-card .card-header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.task-card .card-body {
+  padding: 1.5rem;
+}
+
+.task-card .card-footer {
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Modal styling */
+.modal-content {
+  border: none;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.modal-header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.modal-footer {
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Pagination styling */
+.pagination .page-item.active .page-link {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}
+
+.pagination .page-link {
+  color: #0d6efd;
+  border: 1px solid #dee2e6;
+}
+
+.pagination .page-link:hover {
+  background-color: #e9ecef;
+}
+
+/* Search box */
+.search-box .form-control:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* Status badges */
+.badge-success {
+  background-color: #198754;
+}
+
+.badge-warning {
+  background-color: #9f7906;
+  color: #212529;
+}

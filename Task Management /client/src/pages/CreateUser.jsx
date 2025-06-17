@@ -9,7 +9,7 @@ import {
   Spinner,
   FloatingLabel
 } from 'react-bootstrap';
-import { FaUserPlus, FaEnvelope, FaUserTag } from 'react-icons/fa';
+import { FaUserPlus, FaEnvelope, FaUserTag, FaCheckCircle } from 'react-icons/fa';
 import BackEndUrl from '../config/BackendUrl';
 
 const CreateUser = () => {
@@ -35,7 +35,6 @@ const CreateUser = () => {
     setLoading(true);
     setError('');
     setSuccess(false);
-
 
     if (!formData.name || !formData.email || !formData.designation) {
       setError('Please fill in all fields');
@@ -68,23 +67,39 @@ const CreateUser = () => {
   ];
 
   return (
-    <Container className="py-4">
-      <Card className="shadow-sm border-0">
-        <Card.Body className="p-4">
-          <div className="text-center mb-4">
-            <FaUserPlus size={32} className="text-primary mb-2" />
-            <h2>Create New User</h2>
-            <p className="text-muted">Fill in the details to create a new user account</p>
+    <Container className="py-5" style={{ maxWidth: '600px' }}>
+      <Card className="shadow-lg border-0 rounded-3 overflow-hidden">
+        <Card.Header className="bg-primary text-white py-3">
+          <div className="d-flex align-items-center justify-content-center">
+            <FaUserPlus className="me-2" size={24} />
+            <h3 className="mb-0">Create New User</h3>
           </div>
+        </Card.Header>
+        <Card.Body className="p-4">
+          <p className="text-muted text-center mb-4">
+            Fill in the details below to create a new user account
+          </p>
 
           {error && (
-            <Alert variant="danger" onClose={() => setError('')} dismissible>
+            <Alert 
+              variant="danger" 
+              onClose={() => setError('')} 
+              dismissible
+              className="animate__animated animate__fadeIn"
+            >
+              <FaUserTag className="me-2" />
               {error}
             </Alert>
           )}
 
           {success && (
-            <Alert variant="success" onClose={() => setSuccess(false)} dismissible>
+            <Alert 
+              variant="success" 
+              onClose={() => setSuccess(false)} 
+              dismissible
+              className="animate__animated animate__fadeIn"
+            >
+              <FaCheckCircle className="me-2" />
               User created successfully!
             </Alert>
           )}
@@ -102,6 +117,7 @@ const CreateUser = () => {
                 value={formData.name}
                 onChange={handleChange}
                 required
+                className="border-2"
               />
             </FloatingLabel>
 
@@ -117,12 +133,13 @@ const CreateUser = () => {
                 value={formData.email}
                 onChange={handleChange}
                 required
+                className="border-2"
               />
             </FloatingLabel>
 
             <FloatingLabel
               controlId="floatingDesignation"
-              label="Select Designation"
+              label=""
               className="mb-4"
             >
               <Form.Select
@@ -130,6 +147,7 @@ const CreateUser = () => {
                 value={formData.designation}
                 onChange={handleChange}
                 required
+                className="border-2 py-3"
               >
                 <option value="">Select Designation</option>
                 {designations.map((role, index) => (
@@ -138,12 +156,13 @@ const CreateUser = () => {
               </Form.Select>
             </FloatingLabel>
 
-            <div className="d-grid">
+            <div className="d-grid mt-4">
               <Button
                 variant="primary"
                 type="submit"
                 disabled={loading}
                 size="lg"
+                className="fw-bold py-2 text-uppercase"
               >
                 {loading ? (
                   <>
@@ -155,10 +174,13 @@ const CreateUser = () => {
                       aria-hidden="true"
                       className="me-2"
                     />
-                    Creating...
+                    Creating User...
                   </>
                 ) : (
-                  'Create User'
+                  <>
+                    <FaUserPlus className="me-2" />
+                    Create User
+                  </>
                 )}
               </Button>
             </div>

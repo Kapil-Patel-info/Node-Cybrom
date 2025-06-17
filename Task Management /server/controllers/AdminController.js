@@ -127,11 +127,84 @@ const changeTaskStatus=async(req, res)=>{
 }
 
 
+
+const handleDelete = async (req, res) => {
+  const { id } = req.query;
+  try {
+    const response = await TaskModel.findOneAndDelete({ _id: id });
+    if (!response) {
+      return res.status(404).send({ msg: "Task not found" });
+    }
+    res.status(200).send({ response, msg: "Task deleted successfully" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ msg: "Server error" });
+  }
+};
+
+
+
+const updatetask = async (req, res) => {
+  try {
+    const { _id, title, description, compday } = req.body;
+
+    if (!_id) {
+      return res.status(400).send({ msg: "Task ID is required" });
+    }
+
+    const updatedTask = await TaskModel.findByIdAndUpdate(
+      _id,
+      { title, description, compday },
+      { new: true } // return updated document
+    );
+
+    if (!updatedTask) {
+      return res.status(404).send({ msg: "Task not found" });
+    }
+
+    res.status(200).send({ msg: "Task updated successfully", task: updatedTask });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ msg: "Server error while updating task" });
+  }
+};
+
+
+
+
+
+
+const changepassword = async (req, res) => {
+  const { userid, oldPass, newPass } = req.body;
+
+  try {
+    const user = await UserModel.findById(userid);
+    if (!user) return res.json({ success: false, message: "User not found" });
+
+    if (user.password !== oldPass) {
+      return res.json({ success: false, message: "Old password incorrect" });
+    }
+
+    user.password = newPass;  
+    await user.save();
+
+    res.json({ success: true });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: "Server error" });
+  }
+};
+
+
+
 module.exports={
     adminLogin,
     createUser,
     showUserData,
     assignTask,
      taskDetail,
-    changeTaskStatus
+    changeTaskStatus,
+    handleDelete,
+    updatetask,
+    changepassword
 }

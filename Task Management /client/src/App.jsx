@@ -6,6 +6,7 @@ import CreateUser from "./pages/CreateUser";
 import AssignTask from "./pages/AssignTask";
 import UserDashBoard from "./pages/UserDashBoard";
 import MyTask from "./pages/MyTask";
+import ChangePassword from "./pages/ChangePassword";
 import TaskDetail from "./pages/TaskDetail";
 
 const App = () => {
@@ -27,6 +28,9 @@ const App = () => {
         {/* User dashboard and its nested routes */}
         <Route path="userdashboard" element={<UserDashBoard />}>
           <Route path="mytask" element={<MyTask />} />
+          <Route path="changepassword" element={<ChangePassword />} />
+
+
         </Route>
 
 
