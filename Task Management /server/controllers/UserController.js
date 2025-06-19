@@ -44,9 +44,32 @@ const taskComplete = async (req, res) => {
 
 
 
+const changepassword = async (req, res) => {
+  const { userid, oldPass, newPass } = req.body;
+
+  try {
+    const user = await UserModel.findById(userid);
+    if (!user) return res.json({ success: false, message: "User not found" });
+
+    if (user.password !== oldPass) {
+      return res.json({ success: false, message: "Old password incorrect" });
+    }
+
+    user.password = newPass;  
+    await user.save();
+
+    res.json({ success: true });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: "Server error" });
+  }
+};
+
+
 module.exports = {
   loginCheck,
   myTaskList,
-  taskComplete
+  taskComplete,
+    changepassword
   
 };

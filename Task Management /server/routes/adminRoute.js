@@ -10,7 +10,7 @@ route.get("/changetaskstatus", AdminController.changeTaskStatus);
 route.get("/handleDelete",AdminController.handleDelete);
 
 route.post("/updatetask",AdminController.updatetask);
-route.post("/changepassword",AdminController.changepassword)
+
 
 module.exports=route;
 

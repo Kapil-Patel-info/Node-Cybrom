@@ -7,17 +7,19 @@ import {
   Navbar,
   Spinner,
   FloatingLabel,
+  Alert,
 } from "react-bootstrap";
 import {
   FaUserCircle,
   FaEnvelope,
   FaLock,
   FaSignInAlt,
+  FaEye,
+  FaEyeSlash
 } from "react-icons/fa";
 import axios from "axios";
 import BackEndUrl from "../config/BackendUrl";
 import { useNavigate } from "react-router-dom";
-import "../css/Login.css"; // Make sure this exists and matches admin styling
 
 const Header = () => {
   const [email, setEmail] = useState("");
@@ -44,16 +46,18 @@ const Header = () => {
     setLoading(true);
     setError("");
 
-    let api = `${BackEndUrl}/user/userlogin`;
     try {
-      const response = await axios.post(api, { email, password });
-      localStorage.setItem("username", response.data.User.name);
+      const response = await axios.post(`${BackEndUrl}/user/userlogin`, { 
+        email, 
+        password 
+      });
+      
+      localStorage.setItem("username", email);
       localStorage.setItem("userid", response.data.User._id);
-      navigate("userdashboard");
+      navigate("userdashboard/mytask");
       handleClose();
     } catch (error) {
-      const msg = error.response?.data?.msg || "Login failed. Please try again.";
-      setError(msg);
+      setError(error.response?.data?.msg || "Login failed. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -61,100 +65,148 @@ const Header = () => {
 
   return (
     <>
-      <Navbar bg="dark" variant="dark" expand="lg" className="shadow-sm py-3">
+      <Navbar bg="primary" variant="dark" expand="lg" className="shadow-sm">
         <Container>
-          <Navbar.Brand href="#" className="fs-4 fw-bold">
+          <Navbar.Brand className="fw-bold d-flex align-items-center">
+            <span className="me-2">📋</span>
             Task Management System
           </Navbar.Brand>
           <div className="ms-auto">
-            <FaUserCircle
+            <Button 
+              variant="outline-light" 
               onClick={handleShow}
-              size={30}
-              className="text-white"
-              style={{ cursor: "pointer" }}
-              title="User Login"
-            />
+              className="d-flex align-items-center"
+            >
+              <FaUserCircle className="me-2" />
+              User Login
+            </Button>
           </div>
         </Container>
       </Navbar>
 
       <Modal show={show} onHide={handleClose} centered backdrop="static">
-        <Modal.Header closeButton className="border-0">
-          <Modal.Title className="w-100 text-center fw-semibold">
+        <Modal.Header closeButton className="border-0 pb-0">
+          <Modal.Title className="w-100 text-center fw-bold text-primary">
+            <FaSignInAlt className="me-2" />
             User Login
           </Modal.Title>
         </Modal.Header>
         <Modal.Body className="px-4 pb-4 pt-0">
           {error && (
-            <div className="alert alert-danger py-2 text-center animate__animated animate__shakeX">
+            <Alert variant="danger" className="d-flex align-items-center">
+              <FaUserCircle className="me-2" />
               {error}
-            </div>
+            </Alert>
           )}
+          
           <Form onSubmit={handleSubmit}>
-            <FloatingLabel controlId="floatingEmail" label="Email" className="mb-3">
+            <FloatingLabel 
+              controlId="floatingEmail" 
+              label="Email address" 
+              className="mb-3"
+            >
               <Form.Control
                 type="email"
-                placeholder="Enter email"
+                placeholder="name@example.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
+                className="border-2"
               />
+              <div className="form-icon">
+                <FaEnvelope />
+              </div>
             </FloatingLabel>
 
-            <FloatingLabel controlId="floatingPassword" label="Password" className="mb-3">
+            <FloatingLabel 
+              controlId="floatingPassword" 
+              label="Password"
+              className="mb-3"
+            >
               <Form.Control
                 type={showPassword ? "text" : "password"}
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
+                className="border-2 pe-5"
               />
-            </FloatingLabel>
-
-            <div className="d-flex justify-content-end mb-3">
+              <div className="form-icon">
+                <FaLock />
+              </div>
               <Button
                 variant="link"
-                className="p-0 text-decoration-none"
+                className="password-toggle"
                 onClick={() => setShowPassword(!showPassword)}
               >
-                {showPassword ? "Hide" : "Show"} Password
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </Button>
+            </FloatingLabel>
+
+            <div className="d-grid gap-2">
+              <Button
+                variant="primary"
+                type="submit"
+                size="lg"
+                disabled={loading}
+                className="fw-semibold"
+              >
+                {loading ? (
+                  <>
+                    <Spinner animation="border" size="sm" className="me-2" />
+                    Signing in...
+                  </>
+                ) : (
+                  <>
+                    <FaSignInAlt className="me-2" />
+                    Sign In
+                  </>
+                )}
+              </Button>
+              
+              <Button
+                variant="outline-secondary"
+                size="lg"
+                onClick={handleClose}
+              >
+                Cancel
               </Button>
             </div>
-
-            <Button
-              variant="primary"
-              type="submit"
-              className="w-100 login-btn"
-              disabled={loading}
-            >
-              {loading ? (
-                <>
-                  <Spinner animation="border" size="sm" className="me-2" />
-                  Logging in...
-                </>
-              ) : (
-                <>
-                  <FaSignInAlt className="me-2" />
-                  Login
-                </>
-              )}
-            </Button>
-
-            <Button
-              variant="secondary"
-              className="w-100 mt-3"
-              onClick={handleClose}
-            >
-              Cancel
-            </Button>
           </Form>
         </Modal.Body>
-        <Modal.Footer className="bg-transparent border-0 text-center w-100">
-          <small className="text-muted w-100">
-            &copy; {new Date().getFullYear()} Task Management System. All rights reserved.
+        <Modal.Footer className="bg-light border-0 justify-content-center">
+          <small className="text-muted">
+            &copy; {new Date().getFullYear()} Task Management System
           </small>
         </Modal.Footer>
       </Modal>
+
+      <style jsx>{`
+        .form-icon {
+          position: absolute;
+          top: 50%;
+          left: 12px;
+          transform: translateY(-50%);
+          color: #6c757d;
+        }
+        
+        .form-control {
+          padding-left: 40px !important;
+        }
+        
+        .password-toggle {
+          position: absolute;
+          top: 50%;
+          right: 12px;
+          transform: translateY(-50%);
+          color: #6c757d;
+          text-decoration: none;
+        }
+        
+        .border-2 {
+          border-width: 2px !important;
+        }
+      `}</style>
     </>
   );
 };
