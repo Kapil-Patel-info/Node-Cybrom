@@ -1,8 +1,7 @@
-const crudSchema = new Schema({
-   name: {
-        type: String,
-        require: true
-    },
+const  mongoose = require("mongoose");
+
+const userSchema = new Schema({
+  
   email: {
         type: String,
         require: true
@@ -10,13 +9,9 @@ const crudSchema = new Schema({
    password: {
         type: String,
         require: true
-    },
-     Date: {
-        type: String,
-        default : Date.now()
     }
 });
 
 
 
-const User = mongoose.model('CRUD', crudSchema);
+const User = mongoose.model('user', userSchema);
